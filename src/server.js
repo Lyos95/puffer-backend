@@ -8,9 +8,16 @@ app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI).then(() => console.log('Connected to MongoDB')).catch(err => console.error('MongoDB connection error:', err));
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.status(200).send('Welcome to the pufETH Backend');
 });
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
 
 // Fetch Conversion every 5 minutes
 cron.schedule('*/5 * * * *', fetchConversionRate);
