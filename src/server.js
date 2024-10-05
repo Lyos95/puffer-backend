@@ -10,9 +10,14 @@ mongoose.connect(process.env.MONGO_URI).then(() => console.log('Connected to Mon
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.get('/', (req, res) => {
+    res.status(200).send('Welcome to the pufETH Backend');
 });
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
 
 // Fetch Conversion every 5 minutes
 cron.schedule('*/5 * * * *', fetchConversionRate);
